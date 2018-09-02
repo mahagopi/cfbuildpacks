@@ -1,0 +1,176 @@
+{% extends "sbase.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="ui inverted menu" style="border-radius: 0;background:#02284E">
+<a href="#" class="header item">
+        <img class="logo" style="height: 40px;width: 114px;" src="/static/assets/images/logo.png">
+        
+      </a>
+  <a href="/" class="header item">Home</a>
+  <div href="/portal/quote/" class="active item">Quotes</div>
+  <a class="item">Link</a>
+
+
+  <div class="right menu">
+
+
+    <div class="item">
+      {% comment %} <div class="ui transparent inverted icon input">
+        <i class="search icon"></i>
+        <input style="background: transparent;border-color: black; color: white;" type="text" placeholder="Search">
+      </div> {% endcomment %}
+    </div>
+     {% if user.is_authenticated %}
+         <a class="item">{{ user.username }}</a>
+
+          <form id='my_form' method="post" action="/accounts/logout/">
+             {% csrf_token %}
+            <a href="javascript:{}"  style="height: 100%!important;" class="item" onclick="document.getElementById('my_form').submit();">Sign Out </a>
+          </form>
+
+      {% else %}
+        <a href="/auth/login/" class="item">Login</a>
+        <a href="/auth/signup/" class="item">Signup</a>
+      {% endif %}
+  </div>
+</div>
+
+  <div class="ui main container">
+    <h1 class="ui header">Quote</h1>
+    <p>This is a basic fixed menu  using fixed size containers.</p>
+    <p>A text container is used for the main container, which is useful for single column layouts</p>
+    
+  </div>
+  {% comment %} <br>
+  <hr style="width: 60%;color: #a1a0a0">
+  <br> {% endcomment %}
+
+  <div class="ui divider"></div><br>
+
+  <!-- Container START -->
+  <div class="ui container">
+
+      <div class="ui two column stackable grid">
+
+        <!-- Main Clolumns 1 START -->
+          <div class="column">
+
+             <div class="ui labeled input" style="width:100%">
+               <a class="ui label">
+                 Label
+               </a>
+               <input type="text" placeholder="Placeholder...">
+             </div>
+
+            <div class="ui divider"></div>
+
+             <div class="ui corner labeled input" style="width:100%">
+               <a class="ui label">
+                 Label
+               </a>
+               <input type="text" placeholder="Placeholder...">
+                <div class="ui corner label">
+                  <i class="asterisk icon"></i>
+                </div>
+           </div>
+
+          </div>
+
+        <!-- -END- -->
+        
+        <!-- Main Clolumns 1 START -->
+          <div class="column">
+            
+             <div class="ui labeled icon input" style="width:100%">
+              <a class="ui label">
+                Label
+              </a>
+              <input type="text" placeholder="Placeholder...">
+              <i class="add circle link icon"></i>
+             </div>
+             
+            <div class="ui divider"></div>
+
+             <div class="ui labeled icon input" style="width:100%">
+              <a class="ui label">
+                Label
+              </a>
+              <input type="text" placeholder="Placeholder...">
+              <i class="add circle link icon"></i>
+             </div>
+             
+            <div class="ui divider"></div>
+
+            <div class="ui right labeled input" style="width:100%">
+              <input placeholder="Placeholder" type="text">
+              <div class="ui dropdown label">
+                <div class="text">Dropdown</div>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                  <div class="item">Choice 1</div>
+                  <div class="item">Choice 2</div>
+                  <div class="item">Choice 3</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        <!-- Main Clolumn 2 END -->
+
+        
+      </div>
+
+     
+
+  </div>
+  <!-- Container END -->
+
+  <div class="ui inverted vertical footer segment">
+    <div class="ui center aligned container">
+      <div class="ui stackable inverted divided grid">
+        <div class="three wide column">
+          <h4 class="ui inverted header">Group 1</h4>
+          <div class="ui inverted link list">
+            <a href="#" class="item">Link One</a>
+            <a href="#" class="item">Link Two</a>
+            <a href="#" class="item">Link Three</a>
+            <a href="#" class="item">Link Four</a>
+          </div>
+        </div>
+        <div class="three wide column">
+          <h4 class="ui inverted header">Group 2</h4>
+          <div class="ui inverted link list">
+            <a href="#" class="item">Link One</a>
+            <a href="#" class="item">Link Two</a>
+            <a href="#" class="item">Link Three</a>
+            <a href="#" class="item">Link Four</a>
+          </div>
+        </div>
+        <div class="three wide column">
+          <h4 class="ui inverted header">Group 3</h4>
+          <div class="ui inverted link list">
+            <a href="#" class="item">Link One</a>
+            <a href="#" class="item">Link Two</a>
+            <a href="#" class="item">Link Three</a>
+            <a href="#" class="item">Link Four</a>
+          </div>
+        </div>
+        <div class="seven wide column">
+          <h4 class="ui inverted header">Footer Header</h4>
+          <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+        </div>
+      </div>
+      <div class="ui inverted section divider"></div>
+      <img href="/static/assets/images/logo.png" class="ui centered mini image">
+      <div class="ui horizontal inverted small divided link list">
+        <a class="item" href="#">Site Map</a>
+        <a class="item" href="#">Contact Us</a>
+        <a class="item" href="#">Terms and Conditions</a>
+        <a class="item" href="#">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
