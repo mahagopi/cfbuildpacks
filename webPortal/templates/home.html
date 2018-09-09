@@ -6,30 +6,34 @@
 <!-- Following Menu -->
 <div class="ui large top fixed hidden menu">
   <div class="ui container">
-    <a class="active item">Home</a>
-    <a class="item">Work</a>
-    <a class="item">Company</a>
-    <a class="item">Careers</a>
-    <div class="right menu">
-      <div class="item">
-        <a class="ui button">Log in</a>
-      </div>
-      <div class="item">
-        <a class="ui primary button">Sign Up</a>
-      </div>
-      <form method="post"  class="item" action="/accounts/logout/">
-        <button type="submit">Sign Out</button>
-      </form>
-    </div>
+     <a href="/" class="active item">Home</a>
+      <a href="portal/quote/first" class="item">Quote</a>
+      <a href="/portal/quote/list" class="item">List</a>
+        <div id="qweas" class="item">[]</div>
+        <div class="right item">
+
+
+        {% if user.is_authenticated %}
+          <a id="home_slide" class="ui inverted button">{{ user.username }}</a>
+
+          <form id='my_form' method="post" action="/accounts/logout/">
+             {% csrf_token %}
+            <a href="javascript:{}" class="ui inverted button" onclick="document.getElementById('my_form').submit();">Sign Out </a>
+          </form>
+          {% else %}
+
+            <a href="/auth/login/" class="ui inverted button">Log in</a>{{ user.username }} 
+            <a href="/auth/signup/" class="ui inverted button">Sign Up</a>
+        {% endif %}
+        </div>
   </div>
 </div>
 
 <!-- Sidebar Menu -->
 <div class="ui vertical inverted sidebar menu">
-  <a class="active item">Home</a>
-  <a class="item">Work</a>
-  <a class="item">Company</a>
-  <a class="item">Careers</a>
+   <a href="/" class="active item">Home</a>
+  <a href="portal/quote/first" class="item">Quote</a>
+  <a href="/portal/quote/list" class="item">List</a>
   <a href="/auth/login/" class="item">Login</a>
   <a href="/auth/signup/" class="item">Signup</a>
   <form method="post"  class="item" action="/accounts/logout/">
@@ -48,13 +52,14 @@
           <i class="sidebar icon"></i>
         </a>
         <a href="/" class="active item">Home</a>
-        <a href="portal/quote" class="item">Quote</a>
+        <a href="portal/quote/first" class="item">Quote</a>
         <a href="/portal/quote/list" class="item">List</a>
+        <div id="qweas" class="item">[]</div>
         <div class="right item">
 
 
         {% if user.is_authenticated %}
-          <a  class="ui inverted button">{{ user.username }}</a>
+          <a id="home_slide" class="ui inverted button">{{ user.username }}</a>
 
           <form id='my_form' method="post" action="/accounts/logout/">
              {% csrf_token %}
@@ -74,7 +79,7 @@
         IBM
       </h1>
       <h2>Do whatever you want when you want to with this portal :P</h2>
-      <div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div>
+      <div id="fxdhg" class="ui huge primary button">Get Started <i class="right arrow icon"></i></div>
     </div>
 
   </div>
@@ -162,6 +167,19 @@
     </div>
   </div>
 </div>
+
+
+  <script>
+ $(document).ready(function(){
+
+$( "#user_prof" ).hide();   
+ 
+  $(document).on('click', '#qweas', function() {
+     $( "#user_prof" ).toggle();     
+      });  
+ })
+</script>
+
 
 
 {% endblock %}

@@ -4,8 +4,29 @@
 {% block content %}
  <script>
  $(document).ready(function(){
+   
+  $( "#ws_firewall_yes" ).click(function() {
+    $( "#ws_firewall_no" ).prop( "checked", false );
+});
+  $( "#ws_firewall_no" ).click(function() {
+    $( "#ws_firewall_yes" ).prop( "checked", false );
+});
 
-   $('#nxtpagebtn').click(function(){
+  $( "#ws_hostips_yes" ).click(function() {
+    $( "#ws_hostips_no" ).prop( "checked", false );
+});
+  $( "#ws_hostips_no" ).click(function() {
+    $( "#ws_hostips_yes" ).prop( "checked", false );
+});
+
+  $( "#ws_dacfte_yes" ).click(function() {
+    $( "#ws_dacfte_no" ).prop( "checked", false );
+});
+  $( "#ws_dacfte_no" ).click(function() {
+    $( "#ws_dacfte_yes" ).prop( "checked", false );
+});
+
+   {% comment %} $('#nxtpagebtn').click(function(){
      $( "#epsrvcs" ).removeClass( "hidme" )     
      $( "#btnset1" ).addClass( "hidme" )
    })
@@ -17,8 +38,7 @@
    $('#prvwbtn').click(function(){
      $( "#tnconds" ).removeClass( "hidme" )   
      $( "#finlbtnset" ).removeClass( "hidme" )    
-     $( "#prvwhmpgbtn" ).addClass( "hidme" )  
-   })
+   }) {% endcomment %}
 
     $('#varr1').click(function(){
         $('#w11').html('2');
@@ -53,8 +73,8 @@
     });
  });
  </script>
-<div class="ui inverted menu" style="border-radius: 0;background:#02284E">
-<a href="#" class="header item">
+<div class="ui fixed inverted menu" style="border-radius: 0;background:#02284E;margin: 0!important;">
+<a href="/" class="header item">
         <img class="logo" style="height: 40px;width: 114px;" src="/static/assets/images/logo.png">
         
       </a>
@@ -88,9 +108,9 @@
 </div>
 
   <div class="ui main container" style="width: 90%;">
-    <h1 class="ui header">Service Solution Estimator</h1>
+    <h1 class="ui header">Service Solution Estimator #2</h1>
     <p>IBM India Pvt. Ltd.</p>
-    <p>...</p>
+    <p style="color:white;">...</p>
     
   </div>
   {% comment %} <br>
@@ -99,7 +119,8 @@
 
   <div class="ui divider"></div><br>
 
-<form method="POST" action="/portal/save">
+{% comment %} <form method="POST" action="/portal/quote/preview"> {% endcomment %}
+<form method="POST" action="/portal/quote/final">
 {% csrf_token %}
   <!-- Container START -->
   <div class="ui container" style="width: 90%;">
@@ -114,22 +135,22 @@
           <div class="column">
             <div class="ui labeled input" style="width:100%">
                <a class="ui label"> Form ID # </a>
-               <input type="text" name="form-id" value="{{frm_quote.id}}">
+               <input type="text" name="form_id" value="{{frm_flds.form_id}}">
             </div>
             <div class="ui divider"></div>
             <div class="ui  labeled input" style="width:100%">
                <a class="ui label"> Form Status </a>
-               <input type="text" name="form-status" value="{{frm_quote.form_status}}">
+               <input type="text" name="form_status" value="{{frm_flds.form_status}}">
             </div>
             <div class="ui divider"></div>
             <div class="ui  labeled input" style="width:100%">
                 <a class="ui label"> Requestor </a>
-                <input type="text"  name="requestor-name" placeholder="Placeholder..." value="{{user.username}}">
+                <input type="text"  name="requestor_name" placeholder="Placeholder..." value="{{user.username}}">
             </div>
             <div class="ui divider"></div>
               <div class="ui  labeled input" style="width:100%">
                 <a class="ui label"> Requestor ID </a>
-                <input type="text" name="requestor-email" placeholder="Enter your email Id" value="{{user.email}}" >
+                <input type="text" name="requestor_email" placeholder="Enter your email Id" value="{{user.email}}" >
             </div>
 
           </div>
@@ -139,22 +160,22 @@
           <div class="column">
             <div class="ui labeled input" style="width:100%">
                <a class="ui label"> Submission Date </a>
-               <input type="text"  name="submission-date" value="{{frm_quote.submission_date}}">
+               <input type="date"  name="submission_date" value="2018-08-08">
              </div>
             <div class="ui divider"></div>
             <div class="ui  labeled input" style="width:100%">
                <a class="ui label"> Valid upto </a>
-               <input type="text"  name="valid-upto" value="{{frm_quote.valid_upto}}">
+               <input type="date"  name="valid_upto" value="2018-10-08">
             </div>
             <div class="ui divider"></div>
              <div class="ui  labeled input" style="width:100%">
                <a class="ui label"> Sales Connect# </a>
-               <input type="text"  name="sales-connect" value="{{frm_quote.sales_connect}}">
+               <input type="text"  name="sales_connect" placeholder="Placeholder..." value="{{frm_flds.sales_connect}}">
             </div>
             <div class="ui divider"></div>
             <div class="ui  labeled input" style="width:100%">
                <a class="ui label"> RFS# </a>
-               <input type="text"  name="form-rfs" value="{{frm_quote.form_rfs}}">
+               <input type="text"  name="form_rfs" placeholder="Placeholder..." value="{{frm_flds.form_rfs}}">
            </div>
           </div>
         <!-- -END- -->
@@ -163,22 +184,22 @@
           <div class="column">
               <div class="ui labeled input" style="width:100%">
                <a class="ui label"> Customer/ Account Name </a>
-               <input type="text"  value="{{frm_quote.form_acc_name}}">
+               <input name="form_acc_name" type="text" placeholder="Placeholder..." value="{{frm_flds.form_acc_name}}">
               </div>
               <div class="ui divider"></div>
                 <div class="ui  labeled input" style="width:100%">
                   <a class="ui label"> Customer ID </a>
-                  <input type="text"  value="{{frm_quote.form_cstmr_id}}">
+                  <input name="form_cstmr_id" type="text" placeholder="Placeholder..." value="{{frm_flds.form_cstmr_id}}">
               </div>
               <div class="ui divider"></div>
                 <div class="ui  labeled input" style="width:100%">
                   <a class="ui label"> Sales ID </a>
-                  <input type="text"  value="{{frm_quote.form_sales_id}}">
+                  <input name="form_sales_id" type="text" placeholder="Placeholder..." value="{{frm_flds.form_sales_id}}">
               </div>
               <div class="ui divider"></div>
                 <div class="ui  labeled input" style="width:100%">
                   <a class="ui label"> Approver's Name </a>
-                  <input type="text"  value="{{frm_quote.form_aprv_name}}">
+                  <input name="form_aprv_name" type="text" placeholder="Placeholder..." value="{{frm_flds.form_aprv_name}}">
               </div>
             </div>
         <!-- -END- -->
@@ -189,14 +210,14 @@
             
              <div class="ui right labeled input" style="width:100%">
               <a class="ui label"> Risk Rating </a>
-              <input style="border: 0;" type="text" placeholder=""  value="{{frm_quote.rsk_rating}}">  
+              <input id="rsk-rating" name="rsk_rating" style="border: 0;" type="text"  value="{{frm_flds.rsk_rating}}">  
               <div class="ui dropdown label">
-                <div class="text">{{frm_quote.rsk_rating}}</div>
+                <div class="text">Select</div>
                 <i class="dropdown icon"></i>
                 <div class="menu">
-                  <div class="item">Low</div>
-                  <div class="item">Medium</div>
-                  <div class="item">High</div>
+                  <a href="javascript:{}" onclick="document.getElementById('rsk-rating').value='low';" class="item">Low</a>
+                  <a href="javascript:{}" onclick="document.getElementById('rsk-rating').value='medium';" class="item">Medium</a>
+                  <a href="javascript:{}" onclick="document.getElementById('rsk-rating').value='high';" class="item">High</a>
                 </div>
               </div>            
              </div>
@@ -205,20 +226,20 @@
 
              <div class="ui right labeled input" style="width:100%">
               <a class="ui label"> Region </a>
-              <input style="border: 0;" type="text" placeholder=""  value="{{frm_quote.rsk_region}}">  
+              <input id="rsk-region" name="rsk_region" style="border: 0;" type="text" placeholder="" value="{{frm_flds.rsk_region}}">  
               <div class="ui dropdown label">
-                <div class="text">{{frm_quote.rsk_region}}</div>
+                <div class="text">Select</div>
                 <i class="dropdown icon"></i>
                 <div class="menu">
-                  <div class="item">USA 1</div>
-                  <div class="item">India GDC</div>
-                  <div class="item">India DOM</div>
-                  <div class="item">NORDICS-Home 1</div>
-                  <div class="item">CZECH GDC</div>
-                  <div class="item">ANZ</div>
-                  <div class="item">AFRICA</div>
-                  <div class="item">USE SME</div>
-                  <div class="item">Not Selected Yet</div>
+                  <a href="javascript:{}" onclick="document.getElementById('rsk-region').value='usa1';" class="item">USA 1</a>
+                  <a href="javascript:{}" onclick="document.getElementById('rsk-region').value='indiagdc';" class="item">India GDC</a>
+                  <a  href="javascript:{}" onclick="document.getElementById('rsk-region').value='indiadom';" class="item">India DOM</a>
+                  <a  href="javascript:{}" onclick="document.getElementById('rsk-region').value='modrics';" class="item">NORDICS-Home 1</a>
+                  <a  href="javascript:{}" onclick="document.getElementById('rsk-region').value='czech';" class="item">CZECH GDC</a>
+                  <a  href="javascript:{}" onclick="document.getElementById('rsk-region').value='anz';" class="item">ANZ</a>
+                  <a  href="javascript:{}" onclick="document.getElementById('rsk-region').value='africa';" class="item">AFRICA</a>
+                  <a  href="javascript:{}" onclick="document.getElementById('rsk-region').value='usesme';" class="item">USE SME</a>
+                  <a  href="javascript:{}" onclick="document.getElementById('rsk-region').value='notselected';" class="item">Not Selected Yet</a>
                 </div>
               </div>           
              </div>
@@ -227,13 +248,13 @@
 
              <div class="ui right labeled input" style="width:100%">
                <a class="ui label"> Custom </a>
-               <input style="border: 0;" type="none" placeholder=""  value="{{frm_quote.rsk_custom}}">
+               <input id="rsk-custom" name="rsk_custom" style="border: 0;" type="none" placeholder="" value="{{frm_flds.rsk_custom}}">
                <div class="ui dropdown label">
-                <div class="text">{{frm_quote.rsk_region}}</div>
+                <div class="text">Select</div>
                 <i class="dropdown icon"></i>
                 <div class="menu">
-                  <div class="item">Yes</div>
-                  <div class="item">No</div>
+                  <a href="javascript:{}" onclick="document.getElementById('rsk-custom').value='yes';" class="item">Yes</a>
+                  <a href="javascript:{}" onclick="document.getElementById('rsk-custom').value='no';" class="item">No</a>
                 </div>
               </div>
              </div>
@@ -272,31 +293,31 @@
          <div class="column">            
             <div class="ui labeled input" style="width:100%">
             <a class="ui label"> Endpoint </a>
-            <input type="checkbox"  name="coe-endpoint" placeholder="Placeholder..." {{frm_quote.coe_endpoint}}>              
+            <input type="checkbox"  id="coe_endpoint" name="coe_endpoint" {% if frm_flds.coe_endpoint%}checked{% endif %}>              
             </div>
          </div>
         <div class="column">            
             <div class="ui labeled input" style="width:100%">
             <a class="ui label"> DAS </a>
-            <input type="checkbox"  name="coe-das" placeholder="Placeholder..."  {{frm_quote.coe_das}}>              
+            <input type="checkbox" id="coe_das"  name="coe_das" {% if frm_flds.coe_das%}checked{% endif %}>            
             </div>
          </div>
          <div class="column">            
             <div class="ui labeled input" style="width:100%">
             <a class="ui label"> Infra </a>
-            <input type="checkbox"  name="coe-infra" placeholder="Placeholder..."  {{frm_quote.coe_infra}}>           
+            <input type="checkbox" id="coe_infra"  name="coe_infra" {% if frm_flds.coe_infra%}checked{% endif %}>            
             </div>
          </div>
          <div class="column">            
             <div class="ui labeled input" style="width:100%">
             <a class="ui label"> IAM</a>
-            <input type="checkbox"  name="coe-iam" placeholder="Placeholder..."  {{frm_quote.coe_iam}}>           
+            <input type="checkbox" id="coe_iam"  name="coe_iam"  {% if frm_flds.coe_iam%}checked{% endif %}>   
             </div>
          </div>
          <div class="column">            
             <div class="ui labeled input" style="width:100%">
             <a class="ui label"> SIOC </a>
-            <input type="checkbox"  name="coe-sioc" placeholder="Placeholder..."  {{frm_quote.coe_sioc}}>            
+            <input type="checkbox" id="coe_sioc"  name="coe_sioc" {% if frm_flds.coe_sioc%}checked{% endif %}>        
             </div>
          </div>
     </div>
@@ -305,16 +326,10 @@
 <br>
 
 
-<div id="btnset1" class="ui hidme center aligned container">
-  <br>
-  <br>
-        <a id="" class="ui secondary button">Reset All</a> &nbsp;&nbsp;&nbsp;
-        <a id="nxtpagebtn" class="ui primary button">Next Page</a>
-</div>
 
 <br>
 <!--Endpoint Security services-->
-<div id="epsrvcs" class="ui center aligned container "  style="width: 90%;">
+<div id="epsrvcs" class="ui center aligned container"  style="width: 90%;">
   <div class="ui  attached buttons">
       <div class="ui button">Endpoint Security services</div>
   </div>
@@ -324,31 +339,31 @@
          <div class="column">            
             <div class="ui labeled input" style="width:100%">
             <a class="ui label" > Malware </a>
-            <input type="checkbox" id="eps" name="eps-malware" {{frm_quote.eps_malware}}>              
+            <input type="checkbox" id="eps" name="eps_malware" value="true">              
             </div>
          </div>
                   <div class="column">            
             <div class="ui labeled input" style="width:100%">
             <a class="ui label" > Web Security </a>
-            <input type="checkbox" id="eps" name="eps-websec" {{frm_quote.eps_websec}}>           
+            <input type="checkbox" id="eps" name="eps_websec" value="true">          
             </div>
          </div>
                   <div class="column">            
             <div class="ui labeled input" style="width:100%">
             <a class="ui label"> Email Security </a>
-            <input type="checkbox" id="eps"name="eps-emailsec" {{frm_quote.eps_emailsec}}>  
+            <input type="checkbox" id="eps"name="eps_emailsec" value="true">   
             </div>
          </div>
                   <div class="column">            
             <div class="ui labeled input" style="width:100%">
             <a class="ui label" > Vulnerability Management </a>
-            <input type="checkbox" id="eps" name="eps-vulmgmnt" {{frm_quote.eps_vulmgmnt}}>            
+            <input type="checkbox" id="eps" name="eps_vulmgmnt" value="true">          
             </div>
          </div>
                   <div class="column">            
             <div class="ui labeled input" style="width:100%">
             <a class="ui label"> DLP </a>
-            <input type="checkbox"  id="eps" name="eps-dlp" {{frm_quote.eps_dlp}}>   
+            <input type="checkbox"  id="eps" name="eps_dlp" value="true">  
             </div>
          </div>
       </div>
@@ -370,16 +385,16 @@
 
              <div class="ui right labeled input" style="width:100%">
               <a class="ui label"> Select Windows for Operations </a>
-              <input style="border: 0; color: white;" id="malware-winopn" name="malware-winopn" type="text" placeholder=""  value="{{frm_quote.malware_winopn}}">  
+              <input style="border: 0; color: white;" id="malware_winopn" name="malware_winopn" type="text" placeholder=""  value="">  
               <div class="ui dropdown label">
-                <div class="text">{{frm_quote.malware_winopn}}</div>
+                <div class="text">Select</div>
                 <i class="dropdown icon"></i>
                 <div class="menu">
-                  <a href="javascript:{}" onclick="document.getElementById('malware-winopn').value='8*5';" value="8*5" class="item">8*5</a>
-                  <a href="javascript:{}" onclick="document.getElementById('malware-winopn').value='16*5';" value="16*5" class="item">16*5</a>
-                  <a href="javascript:{}" onclick="document.getElementById('malware-winopn').value='24*7';" value="24*7" class="item">24*7</a>
-                  <a href="javascript:{}" onclick="document.getElementById('malware-winopn').value='8*5oc';" value="8*5oc" class="item">8*5 wih Oncall</a>
-                  <a href="javascript:{}" onclick="document.getElementById('malware-winopn').value='16*5oc';" value="16*5oc" class="item">16*5 with Oncall</a>
+                  <a href="javascript:{}" onclick="document.getElementById('malware_winopn').value='8*5';" value="8*5" class="item">8*5</a>
+                  <a href="javascript:{}" onclick="document.getElementById('malware_winopn').value='16*5';" value="16*5" class="item">16*5</a>
+                  <a href="javascript:{}" onclick="document.getElementById('malware_winopn').value='24*7';" value="24*7" class="item">24*7</a>
+                  <a href="javascript:{}" onclick="document.getElementById('malware_winopn').value='8*5oc';" value="8*5oc" class="item">8*5 wih Oncall</a>
+                  <a href="javascript:{}" onclick="document.getElementById('malware_winopn').value='16*5oc';" value="16*5oc" class="item">16*5 with Oncall</a>
                 </div>
               </div>            
              </div>
@@ -389,14 +404,14 @@
       <div class="column" style="padding-bottom: 30px;"> 
              <div class="ui right labeled input" style="width:100%">
               <a class="ui label"> Service Scope </a>
-              <input style="border: 0; color:white" id="malware-srvcscp" name="malware-srvcscp" type="text" placeholder=""  value="{{frm_quote.malware_srvcscp}}">
+              <input style="border: 0; color:white" id="malware_srvcscp" name="malware_srvcscp" type="text" placeholder=""  value="">  
               <div class="ui dropdown label">
-                <div class="text">{{frm_quote.malware_srvcscp}}</div>
+                <div class="text">Select</div>
                 <i class="dropdown icon"></i>
                 <div class="menu">
-                  <a href="javascript:{}" onclick="document.getElementById('malware-srvcscp').value='servers';" value="servers" class="item">Servers</a>
-                  <a href="javascript:{}" onclick="document.getElementById('malware-srvcscp').value='workstations';" value="workstations" class="item">Workstations</a>
-                  <a href="javascript:{}" onclick="document.getElementById('malware-srvcscp').value='srvcwrkstn';" value="srvcwrkstn" class="item">Servers & Workstations</a>
+                  <a href="javascript:{}" onclick="document.getElementById('malware_srvcscp').value='servers';" value="servers" class="item">Servers</a>
+                  <a href="javascript:{}" onclick="document.getElementById('malware_srvcscp').value='workstations';" value="workstations" class="item">Workstations</a>
+                  <a href="javascript:{}" onclick="document.getElementById('malware_srvcscp').value='srvcwrkstn';" value="srvcwrkstn" class="item">Servers & Workstations</a>
                 </div>
               </div>           
              </div>
@@ -413,39 +428,39 @@
         <div class="ui three column stackable grid ">
           <!-- Left 1 column -->
           <div class="column">          
-            <div class="ui  labeled input" style="width:100%">
+            <div class="ui disabled labeled input" style="width:100%">
                <a class="ui label"> BS </a>
-               <input  name="esc-bs" value="{{frm_quote.esc_bs}}" type="text">
+               <input  name="esc_bs" value="0.0" type="text">
             </div>
             <div class="ui divider"></div>
-            <div class="ui  labeled input" style="width:100%">
+            <div class="ui disabled labeled input" style="width:100%">
                <a class="ui label"> Base FTE </a>
-               <input  name="esc-bfte" value="{{frm_quote.esc_bfte}}" type="text">
+               <input  name="esc_bfte" value="0.0" type="text">
             </div>
           </div>
         <!-- Middle 2 column -->
           <div class="column">
-            <div class="ui  labeled input" style="width:100%">
+            <div class="ui disabled labeled input" style="width:100%">
                <a class="ui label"> B7 </a>
-               <input name="esc-b7" value="{{frm_quote.esc_b7}}" type="text">
+               <input name="esc_b7" value="0.0" type="text">
             </div>
-            <div class="ui divider"></div>
-            <div class="ui  labeled input" style="width:100%">
+            <div class="ui  divider"></div>
+            <div class="ui disabled labeled input" style="width:100%">
                <a class="ui label"> Total FTE </a>
-               <input name="esc-tfte" value="{{frm_quote.esc_tfte}}" type="text">
+               <input name="esc_tfte" value="0.0" type="text">
             </div>
           </div>
         <!-- Right 3 column -->
           <div class="column">
           
-            <div class="ui  labeled input" style="width:100%">
+            <div class="ui disabled labeled input" style="width:100%">
                <a class="ui label"> B7 </a>
-               <input name="esc-b77" value="{{frm_quote.esc_b77}}" type="text">
+               <input name="esc_b77" value="0.0" type="text">
             </div>
-            <div class="ui divider"></div>
-            <div class="ui  labeled input" style="width:100%">
+            <div class="ui  divider"></div>
+            <div class="ui disabled labeled input" style="width:100%">
                <a class="ui label"> Transition FTE </a>
-               <input name="esc-ttfte" value="{{frm_quote.esc_ttfte}}" type="text">
+               <input name="esc_ttfte" value="0.0" type="text">
             </div>
 
           </div>
@@ -455,7 +470,7 @@
     </div>
     <br>
 
-    <div class="ui center aligned container hidme"  style="width: 100%;">
+    <div class="ui center aligned container"  style="width: 100%;">
     <div class="ui  attached buttons">
         <div class="ui button">Workstations</div>
     </div>
@@ -466,7 +481,7 @@
     
              <div class="ui right labeled input" style="width:100%">
               <a class="ui label"> Vendor </a>
-              <input style="border: 0;" id="servers-vendor" name="servers-vendor" type="text" placeholder=""  value="">  
+              <input style="border: 0;" id="servers-vendor" name="servers_vendor" type="text" placeholder=""  value="">  
               <div class="ui dropdown label" id="varr1">
                 <div class="text">Select</div>
                 <i class="dropdown icon"></i>
@@ -481,20 +496,17 @@
 
             <div class="ui  labeled input" style="width:100%">
                 <a class="ui label"> Anti-Malware (Agent) </a>
-                <input name="servers-antimware" placeholder="Placeholder..." type="text">
+                <input name="servers_antimware" required="required" placeholder="Placeholder..." type="text">
             </div>
             <div class="ui divider"></div>
-            
-
-               <div class="ui divider"></div>
               <div class="ui labeled input" style="width:100%">
                 <a class="ui label"> Host Firewall </a>
-               <input style="border: 0;" type="text" placeholder="" disabled>   
+               <input style="border: 0;" type="text" placeholder="" value="">   
                 <div class="ui  label">
-                  No
-                  <input type="checkbox" {{frm_quote.ws_firewall_yes}}>
-                  Yes  
-                  <input type="checkbox" {{frm_quote.ws_firewall_no}}>
+                  Yes
+                  <input id="ws_firewall_yes" name="ws_firewall_yes" type="checkbox" value="true">
+                  No  
+                  <input id="ws_firewall_no" name="ws_firewall_no" type="checkbox" value="true">  
                 </div>            
               </div>
             <div class="ui divider"></div>
@@ -502,12 +514,12 @@
            
               <div class="ui labeled input" style="width:100%">
                 <a class="ui label"> Host IPS </a>
-               <input style="border: 0;" type="text" placeholder="" disabled>   
+               <input style="border: 0;" type="text" placeholder="" value="">   
                 <div class="ui  label">
-                  No
-                  <input type="checkbox" {{frm_quote.ws_hostips_yes}}>
-                  Yes  
-                  <input type="checkbox" {{frm_quote.ws_hostips_no}}>  
+                  Yes
+                  <input id="ws_hostips_yes" name="ws_hostips_yes" type="checkbox" value="true">
+                  No  
+                  <input id="ws_hostips_no" name="ws_hostips_no" type="checkbox" value="true">  
                 </div>            
               </div>
                <div class="ui divider"></div>
@@ -515,16 +527,16 @@
                 <a class="ui label"> Device Application Control FTE </a>
                <input style="border: 0;" type="text" placeholder="" disabled>      
                 <div class="ui  label">
-                  No
-                  <input type="checkbox" {{frm_quote.ws_dacfte_yes}}>
-                  Yes  
-                  <input type="checkbox" {{frm_quote.ws_dacfte_yno}}>  
+                  Yes
+                  <input id="ws_dacfte_yes" name="ws_dacfte_yes" type="checkbox"  value="true">
+                  No  
+                  <input id="ws_dacfte_no" name="ws_dacfte_no" type="checkbox"  value="true">  
                 </div>         
               </div>
             <div class="ui divider"></div>
             <div class="ui  labeled input" style="width:100%">
                 <a class="ui label"> Number of Consoles </a>
-                <input name="servers-noconsole" placeholder="..." type="text">
+                <input required="required" name="servers_noconsole" placeholder="..." type="text">
             </div>
               <br>              
               <br>
@@ -603,10 +615,63 @@
     </div>
 
   </div>
+
+
+  <br>
+
+  <div id="tnconds" class="ui center aligned container "  style="width: 100%;">
+    <div class="ui  attached buttons">
+        <div class="ui button">Terms and Condition</div>
+    </div>
+    <!-- Container -->
+    <div class="ui one column stackable grid attached segment">
+      <div class="column"> 
+      
+            <div class="ui  labeled input" style="width:100%">
+                  <a class="ui label" style="background: transparent;"> Read Policy </a>
+                  <textarea rows="14" cols="50" style="width: 100%;padding: 10px;" type="text" name="trm_cond" value="qqq" >
+                    Please Note :
+
+                    During Transition months shifts will not be considered. If shifts required during Transition than add those months to Agreement terms month.
+
+                    Service Start Date should be minimum 4 months from Solution Date else would need GID approval to start early.
+
+                    Use Case developer will work only in 8x5 shift.
+
+                    No On-call during Transition.
+
+                    Final Cost will only appear in PDF once Solution is Saved.
+
+                    Limitation:
+
+                    SIOC Solution will NOT function if EPS is less than 800
+
+                    Years of Service is limited to 10 years.
+
+                    Cost is shown in USD only.
+
+                    GID can not service if Term of Agreement is less than 12 months (excluding Transition time) 
+
+                    </textarea> 
+              </div>
+              
+            <br>
+
+      </div>
+      {% if frm_flds.form_status != "Submitted"%}
+      <div class="column" style="float:right"> 
+        <button class="ui teal button">Edit</button> &nbsp;&nbsp;&nbsp;
+        {% comment %} <a class="ui primary button">Download PDF</a> {% endcomment %}
+      </div>
+       {% endif %}
+
+    </div>
+  </div>
+
               <br>
               <div id="prvwhmpgbtn" class="ui right labeled input" style="width:100%">
-                  <a class="ui secondary button">Click here to go Homepage</a> &nbsp;&nbsp;&nbsp;
-                  <a id="prvwbtn" class="ui primary button">Click here to preview</a>
+                  <a href="/portal/quote/" class="ui secondary button">Click here to go Homepage</a> &nbsp;&nbsp;&nbsp;
+                  <button id="prvwbtn" class="ui primary button">Click here to Submit</button>
               </div>
 </div>
   </div>
@@ -614,57 +679,12 @@
 
 <br>
 
-<div id="tnconds" class="ui center aligned container "  style="width: 90%;">
-  <div class="ui  attached buttons">
-      <div class="ui button">Terms and Condition</div>
-  </div>
-  <!-- Container -->
-  <div class="ui one column stackable grid attached segment">
-    <div class="column"> 
-    
-           <div class="ui  labeled input" style="width:100%">
-                <a class="ui label" style="background: transparent;"> Read Policy </a>
-                 <textarea rows="14" cols="50" style="width: 100%;padding: 10px;" type="text" name="tnconds">
-Please Note :
 
-During Transition months shifts will not be considered. If shifts required during Transition than add those months to Agreement terms month.
-
-Service Start Date should be minimum 4 months from Solution Date else would need GID approval to start early.
-
-Use Case developer will work only in 8x5 shift.
-
-No On-call during Transition.
-
-Final Cost will only appear in PDF once Solution is Saved.
-
-Limitation:
-
-SIOC Solution will NOT function if EPS is less than 800
-
-Years of Service is limited to 10 years.
-
-Cost is shown in USD only.
-
-GID can not service if Term of Agreement is less than 12 months (excluding Transition time) 
-
-</textarea> 
-            </div>
-             
-           <br>
-
-     </div>
-    <div class="column" style="float:right"> 
-      <button class="ui teal button">Submit</button> &nbsp;&nbsp;&nbsp;
-      <a class="ui primary button">Download PDF</a>
-    </div>
-
-  </div>
-</div>
 <br>
-<div id="finlbtnset" class="ui center aligned container hidme"  style="width: 90%;">
+<!--div id="finlbtnset" class="ui center aligned container hidme"  style="width: 90%;">
         <a class="ui red button">Cancel</a> &nbsp;&nbsp;&nbsp;
         <button class="ui primary button">Submit</button>
-</div>
+</div-->
 
 </div>
 </form>
@@ -714,5 +734,20 @@ GID can not service if Term of Agreement is less than 12 months (excluding Trans
       </div>
     </div>
   </div>
+
+
+
+  <script>
+ $(document).ready(function(){
+
+$( "#user_prof" ).hide();   
+ 
+  $(document).on('click', '#qweas', function() {
+     $( "#user_prof" ).toggle();     
+      });  
+ })
+</script>
+
+
 
 {% endblock %}
