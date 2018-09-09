@@ -4,6 +4,17 @@
 {% block content %}
 
 
+  <script>
+ $(document).ready(function(){
+
+$( "#user_prof" ).hide();   
+ 
+  $(document).on('click', '#qweas', function() {
+     $( "#user_prof" ).toggle();     
+      });  
+ })
+</script>
+
 <div class="ui inverted menu" style="border-radius: 0;background:#02284E">
 <a href="#" class="header item">
         <img class="logo" style="height: 40px;width: 114px;" src="/static/assets/images/logo.png">

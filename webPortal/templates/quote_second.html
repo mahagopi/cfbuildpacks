@@ -2,6 +2,18 @@
 {% load staticfiles %}
 
 {% block content %}
+
+  <script>
+ $(document).ready(function(){
+
+$( "#user_prof" ).hide();   
+ 
+  $(document).on('click', '#qweas', function() {
+     $( "#user_prof" ).toggle();     
+      });  
+ })
+</script>
+
  <script>
  $(document).ready(function(){
    
