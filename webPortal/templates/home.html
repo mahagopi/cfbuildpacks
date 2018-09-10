@@ -55,7 +55,7 @@
         </a>
         {% comment %} <a href="/" class="active item">Home</a> {% endcomment %}
         {% if user.is_authenticated %}
-        <a href="portal/quote/first" class="item">Quote</a>
+        <a href="/portal/quote/first" class="item">Quote</a>
         <a href="/portal/quote/list" class="item">List</a>
         <div id="qweas" class="item">[]</div>
         {% endif %}
@@ -83,7 +83,11 @@
         Blue Quote
       </h1>
       <h2>Do whatever you want when you want to with this portal :P</h2>
-      <div id="fxdhg" class="ui huge primary button">Get Started <i class="right arrow icon"></i></div>
+      {% if user.is_authenticated %}
+      <div id="fxdhg" class="ui huge primary button"><a style="color: white;" href="/portal/quote/first">Quote </a><i class="right arrow icon"></i></div>
+      {% else %}
+      <div id="fxdhg" class="ui huge primary button"><a style="color: white;" href="/auth/signup/">Register  </a><i class="right arrow icon"></i></div>
+      {% endif %}
     </div>
 
   </div>

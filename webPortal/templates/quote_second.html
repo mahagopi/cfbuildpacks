@@ -93,6 +93,7 @@ $( "#user_prof" ).hide();
   <a href="/" class="header item">Home</a>
   <div href="/portal/quote/" class="active item">Quotes</div>
   <a href="/portal/quote/list" class="item">List</a>
+        <a id="qweas" class="item">[]</a>
 
 
   <div class="right menu">
@@ -637,11 +638,47 @@ $( "#user_prof" ).hide();
     </div>
     <!-- Container -->
     <div class="ui one column stackable grid attached segment">
+
+
       <div class="column"> 
       
             <div class="ui  labeled input" style="width:100%">
                   <a class="ui label" style="background: transparent;"> Read Policy </a>
-                  <textarea rows="14" cols="50" style="width: 100%;padding: 10px;" type="text" name="trm_cond" value="qqq" >
+                  <textarea rows="10" cols="50" style="width: 100%;padding: 10px;" type="text" disabled>
+                    Please Note :
+
+                    During Transition months shifts will not be considered. If shifts required during Transition than add those months to Agreement terms month.
+
+                    Service Start Date should be minimum 4 months from Solution Date else would need GID approval to start early.
+
+                    Use Case developer will work only in 8x5 shift.
+
+                    No On-call during Transition.
+
+                    Final Cost will only appear in PDF once Solution is Saved.
+
+                    Limitation:
+
+                    SIOC Solution will NOT function if EPS is less than 800
+
+                    Years of Service is limited to 10 years.
+
+                    Cost is shown in USD only.
+
+                    GID can not service if Term of Agreement is less than 12 months (excluding Transition time) 
+
+                    </textarea> 
+              </div>
+              
+            <br>
+
+      </div>
+
+
+      <div class="column">   
+            <div class="ui  labeled input" style="width:100%">
+                  <a class="ui label" style="background: transparent;"> Edit Policy </a>
+                  <textarea rows="10" cols="50" style="width: 100%;padding: 10px;" type="text" name="trm_cond" value="qqq" >
                     Please Note :
 
                     During Transition months shifts will not be considered. If shifts required during Transition than add those months to Agreement terms month.

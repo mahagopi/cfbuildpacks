@@ -54,7 +54,7 @@ class Quotation(models.Model):
     servers_antimware = models.CharField(max_length=200)
     servers_noconsole = models.CharField(max_length=200)
   
-    trm_cond = models.CharField(max_length=200)
+    trm_cond = models.CharField(max_length=1000)
 
 class UserQuote(models.Model):
     frm_id = models.UUIDField()
@@ -64,4 +64,8 @@ class UserQuote(models.Model):
 class Approver(models.Model):
     usr_email = models.CharField(max_length=200)
     usr_name = models.CharField(max_length=200)
+class userRole(models.Model):
+    usr_email = models.CharField(max_length=200)
+    usr_name = models.CharField(max_length=200)
+    usr_role = models.CharField(max_length=200)
    
